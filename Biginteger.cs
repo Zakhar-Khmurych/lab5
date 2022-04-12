@@ -136,10 +136,10 @@ namespace lab5try1
             {
                 num2Copy[i + maxLength - another._numbers.Length] = another._numbers[i];
             }
-
+            
             for (int i = 0; i < maxLength; i++)
             {
-                if (this._numbers[i] < another._numbers[i])
+                if (num1Copy[i] < num2Copy[i])
                 {
                     isNegative = true;
                     break;
@@ -176,12 +176,21 @@ namespace lab5try1
            
             
             string d ="";
+            bool leadingZero = true;
             
             if ((diff[0] == 0) && (diff.Length>1))
             {
                 for (int i = 1; i < diff.Length; i++)
                 {
-                    d += diff[i];
+                    if ((diff[i]==0)&&leadingZero)
+                    {
+                        
+                    }  
+                    else
+                    {
+                        d += diff[i];
+                        leadingZero = false;
+                    }
                 }
             }
             else
