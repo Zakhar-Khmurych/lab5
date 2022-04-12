@@ -7,10 +7,11 @@ namespace lab5try1
         static void Main(string[] args)
         {
 
-            BigInteger x = new BigInteger("15");
+            BigInteger x = new BigInteger("12345");
             //Console.WriteLine(x);
 
-            Console.WriteLine(BigInteger.a);
+            BigInteger y = new BigInteger("678");
+            Console.WriteLine(x.Add(y));
 
         }
     }
