@@ -176,18 +176,22 @@ namespace lab5try1
            
             
             string d ="";
-            //bool leadingZero = true;
+            bool leadingZero = true;
             
             if ((diff[0] == 0) && (diff.Length>1))
             {
                 for (int i = 1; i < diff.Length; i++)
-                {
-                 //   if (!((diff[i]==0)&&leadingZero))
-                   // {
+                { 
+                    if (!((diff[i]==0)&&leadingZero))
+                   {
                         d += diff[i];
-                    //    leadingZero = false;
-                   // }
+                       leadingZero = false;
+                   }
                 }
+            }
+            else if (diff[diff.Length-1]==0)
+            {
+                d += 0;
             }
             else
             {
