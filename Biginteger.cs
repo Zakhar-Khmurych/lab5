@@ -202,7 +202,7 @@ namespace lab5try1
             }
             
             BigInteger result = new BigInteger(d);
-            result._is_negative = isNegative;
+            //result._is_negative = isNegative;
             return result;
         }
     }
