@@ -119,6 +119,7 @@ namespace lab5try1
             {
                 maxLength = another._numbers.Length;
                 minLength = this._numbers.Length;
+                isNegative = true;
             }
 
             int[] num1Copy;
@@ -140,34 +141,74 @@ namespace lab5try1
             
             int[] diff;
             diff = new int[maxLength];
-            string sub_result ="";
+            string sub_result = "";
             bool leadingZero = true;
 
 
-            for (int i = 0; i < diff.Length; i++)
+            if (this._numbers.Length > another._numbers.Length)
             {
-                diff[i] = num1Copy[i] - num2Copy[i];
-            }
-
-            for (int i = diff.Length-1; i >= 0; i--)
-            {
-                if (diff[i] < 0)
+                for (int i = 0; i < diff.Length; i++)
                 {
-                    diff[i] += 10;
-                    diff[i - 1] += -1;
+                    diff[i] = num1Copy[i] - num2Copy[i];
+                    if (diff[i] < 0)
+                    {
+                        diff[i] += 10;
+                        diff[i - 1] += -1;
+                    }
+                }
+            }
+            else if (this._numbers.Length < another._numbers.Length)
+            {
+                for (int i = 0; i < diff.Length; i++)
+                {
+                    diff[i] = num2Copy[i] - num1Copy[i];
+                    if (diff[i] < 0)
+                    {
+                        diff[i] += 10;
+                        diff[i - 1] += -1;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < diff.Length; i++)
+                {
+                    diff[i] = num1Copy[i] - num2Copy[i];
                 }
             }
 
-
-
+            int start_point = 0;
+            
             for (int i = 0; i < diff.Length; i++)
             {
-                sub_result += Convert.ToString(diff[i]);
-                //sub_result += "";
+                if (diff[i] != 0)
+                {
+                    start_point = i;
+                    break;
+                }
+                else if(i==diff.Length-1)
+                {
+                    start_point = i;
+                    isNegative = false;
+                }
             }
             
-            BigInteger result = new BigInteger(sub_result);
-            //result._is_negative = isNegative;
+
+            for (int i = start_point; i < diff.Length; i++)
+            {
+                if (diff[i] >= 0)
+                {
+                    sub_result += diff[i];
+                }
+                else
+                {
+                    sub_result += diff[i]*-1;
+                    isNegative = true;
+                }
+            }
+
+            BigInteger result = new BigInteger(sub_result); 
+            result._is_negative = isNegative;
             return result;
         }
     }
