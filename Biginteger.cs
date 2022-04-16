@@ -175,10 +175,28 @@ namespace lab5try1
             }
            
             
-            string d ="";
+            string sub_result ="";
             bool leadingZero = true;
+
+            for (int i = 0; i < diff.Length; i++)
+            {
+               ;
+            }
             
-            if ((diff[0] == 0) && (diff.Length>1))
+            if ((diff[diff.Length-1]==0))
+            {
+                sub_result += 0;
+            }
+            else
+            {
+                for (int i = 1; i < diff.Length; i++)
+                {
+                    sub_result += diff[i];
+                }
+            }
+
+            /*
+            else if ((diff[0] == 0) && (diff.Length>1))
             {
                 for (int i = 1; i < diff.Length; i++)
                 { 
@@ -189,10 +207,6 @@ namespace lab5try1
                    }
                 }
             }
-            else if (diff[diff.Length-1]==0)
-            {
-                d += 0;
-            }
             else
             {
                 for (int i = 0; i < diff.Length; i++)
@@ -200,9 +214,10 @@ namespace lab5try1
                     d += diff[i];
                 }
             }
+            */
             
-            BigInteger result = new BigInteger(d);
-            //result._is_negative = isNegative;
+            BigInteger result = new BigInteger(sub_result);
+            result._is_negative = isNegative;
             return result;
         }
     }
