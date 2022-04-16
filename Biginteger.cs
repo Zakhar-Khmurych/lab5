@@ -38,6 +38,7 @@ namespace lab5try1
 
             return _numbersString;
         }
+        
         public BigInteger Add(BigInteger another)
         {
 
@@ -137,87 +138,36 @@ namespace lab5try1
                 num2Copy[i + maxLength - another._numbers.Length] = another._numbers[i];
             }
             
-            for (int i = 0; i < maxLength; i++)
-            {
-                if (num1Copy[i] < num2Copy[i])
-                {
-                    isNegative = true;
-                    break;
-                }
-            }
-
             int[] diff;
-            diff = new int[maxLength+1];
-            
-            if (isNegative)
-            {
-                for (int i = maxLength-1; i >=0; i--)
-                {
-                    diff[i+1] = num2Copy[i] - num1Copy[i];
-                }
-            }
-            else
-            {
-                for (int i = maxLength-1; i >=0; i--)
-                {
-                    diff[i+1] = num1Copy[i] - num2Copy[i];
-                }
-            }
-            
-
-            for (int i = diff.Length - 1; i > 0; i--)
-            {
-                if (diff[i] < 0)
-                {
-                    diff[i] = diff[i] + 10;
-                    diff[i - 1] = diff[i - 1] - 1;
-                }
-            }
-           
-            
+            diff = new int[maxLength];
             string sub_result ="";
             bool leadingZero = true;
 
+
             for (int i = 0; i < diff.Length; i++)
             {
-               ;
+                diff[i] = num1Copy[i] - num2Copy[i];
             }
-            
-            if ((diff[diff.Length-1]==0))
+
+            for (int i = diff.Length-1; i >= 0; i--)
             {
-                sub_result += 0;
-            }
-            else
-            {
-                for (int i = 1; i < diff.Length; i++)
+                if (diff[i] < 0)
                 {
-                    sub_result += diff[i];
+                    diff[i] += 10;
+                    diff[i - 1] += -1;
                 }
             }
 
-            /*
-            else if ((diff[0] == 0) && (diff.Length>1))
+
+
+            for (int i = 0; i < diff.Length; i++)
             {
-                for (int i = 1; i < diff.Length; i++)
-                { 
-                    if (!((diff[i]==0)&&leadingZero))
-                   {
-                        d += diff[i];
-                       leadingZero = false;
-                   }
-                }
+                sub_result += Convert.ToString(diff[i]);
+                //sub_result += "";
             }
-            else
-            {
-                for (int i = 0; i < diff.Length; i++)
-                {
-                    d += diff[i];
-                }
-            }
-            */
             
             BigInteger result = new BigInteger(sub_result);
-            result._is_negative = isNegative;
+            //result._is_negative = isNegative;
             return result;
         }
     }
