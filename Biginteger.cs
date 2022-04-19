@@ -211,5 +211,81 @@ namespace lab5try1
             result._is_negative = isNegative;
             return result;
         }
+
+
+        public BigInteger Mult(BigInteger another)
+        {
+            /*
+            int maxLength = this._numbers.Length;
+            int minLength = another._numbers.Length;
+
+            int[] num1Copy;
+            int[] num2Copy;
+
+            if (this._numbers.Length < another._numbers.Length)
+            {
+                maxLength = another._numbers.Length;
+                minLength = this._numbers.Length;
+
+            }
+            
+            num1Copy = new int[maxLength];
+            num2Copy = new int[maxLength];
+            */
+            
+            BigInteger result = new BigInteger(Convert.ToString(Karatsuba(this, another)));
+            return result;
+        }
+
+        public BigInteger Karatsuba(BigInteger x, BigInteger y)
+        {
+            BigInteger result;
+
+            int len = x._numbers.Length;
+            
+            if (len == 1) 
+            {
+                result = new BigInteger(Convert.ToString(x._numbers[0]*y._numbers[0]));
+            }
+            else
+            {
+                /*
+                int[] a = new int[len/2];
+                int[] b = new int[len/2];
+                int[] c = new int[len/2];
+                int[] d = new int[len/2];
+                
+                
+                for (int i = 0; i < len/2; i++)
+                {
+                    a[i] = x._numbers[i];
+                    c[i] = y._numbers[i];
+                }
+                for (int i = len/2; i < len-len/2; i++)
+                {
+                    b[i] = x._numbers[i];
+                    d[i] = y._numbers[i];
+                } */
+
+                BigInteger a = new BigInteger(x._numbersString.Substring(0, len/2));
+                BigInteger b = new BigInteger(x._numbersString.Substring(len/2+1));
+                BigInteger c = new BigInteger(y._numbersString.Substring(0, len/2));
+                BigInteger d = new BigInteger(y._numbersString.Substring(len/2+1));
+
+                BigInteger p0 = Karatsuba(b, d);
+                BigInteger p1 = Karatsuba(a.Add(b), c.Add(d)); 
+                BigInteger p2 = Karatsuba(a, c);
+
+                BigInteger s2 = Karatsuba(p2, new BigInteger(Convert.ToString(Math.Pow(10, len))));
+                BigInteger s1 = Karatsuba(p1.Sub(p2).Sub(p0), new BigInteger(Convert.ToString(Math.Pow(10, len/2))));
+
+                result = new BigInteger(Convert.ToString(s2.Add(s1).Add(p0)));
+
+                // result = new BigInteger(Convert.ToString(p2*Math.Pow(10, len)));
+                //(z2 × 10 ^ (m2 × 2)) + ((z1 - z2 - z0) × 10 ^ m2) + z0
+            }
+            return result;
+        }
+
     }
 }
